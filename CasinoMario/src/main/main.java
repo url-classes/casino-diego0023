@@ -4,11 +4,13 @@
  */
 package main;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -23,8 +25,10 @@ public class main extends javax.swing.JFrame {
     Hilo Hilo1 = new Hilo();
     Hilo Hilo2 = new Hilo();
     Hilo Hilo3 = new Hilo();
-
+FondoPanel fondo = new FondoPanel();
+    
     public main() {
+        this.setContentPane(fondo);
         initComponents();
         // apariencia inicial de las ventanas 
         Image img = new ImageIcon(this.getClass().getResource("/img/estrella.jpg")).getImage();
@@ -178,8 +182,10 @@ public class main extends javax.swing.JFrame {
         btnIniciar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Casino");
         setMaximumSize(new java.awt.Dimension(40, 15));
         setMinimumSize(new java.awt.Dimension(40, 15));
+        setName("Cacino de Mario Bros 3"); // NOI18N
 
         lbca1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbca1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255), 2));
@@ -190,6 +196,7 @@ public class main extends javax.swing.JFrame {
         lbca3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbca3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 204), 2));
 
+        btnStop1.setBackground(new java.awt.Color(153, 51, 0));
         btnStop1.setText("STOP");
         btnStop1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,6 +204,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        btnStop2.setBackground(new java.awt.Color(153, 51, 0));
         btnStop2.setText("STOP");
         btnStop2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,6 +212,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        btnStop3.setBackground(new java.awt.Color(153, 51, 0));
         btnStop3.setText("STOP");
         btnStop3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,6 +220,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        btnStopAll.setBackground(new java.awt.Color(153, 51, 0));
         btnStopAll.setText("STOP ALL");
         btnStopAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,6 +228,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        btnIniciar.setBackground(new java.awt.Color(153, 51, 0));
         btnIniciar.setText("INICIAR TODOS");
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,20 +248,23 @@ public class main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnStop3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbca1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lbca3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(lbca2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(182, 182, 182)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnStopAll, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbca1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbca3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(lbca2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(22, 22, 22))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(182, 182, 182)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnStopAll, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,4 +380,18 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel lbca2;
     private javax.swing.JLabel lbca3;
     // End of variables declaration//GEN-END:variables
+
+ class FondoPanel extends JPanel{
+     private Image imagen; 
+     
+     @Override
+     public void paint(Graphics g){
+         imagen = new ImageIcon(getClass().getResource("/img/fondo.jpg")).getImage();
+       g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+       
+         setOpaque(false);
+         
+         super.paint(g);
+     }
+ }
 }
