@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -60,10 +61,18 @@ public class main extends javax.swing.JFrame {
             run = false;
             
         }
+        
+        public boolean getRun(){
+            return this.run;
+        }
 
         public int getRandom() {
             int random = (int) (Math.random() * 3 + 1);
             return random;
+        }
+        
+        public int getFoto(){
+            return this.foto;
         }
 
         @Override
@@ -269,16 +278,19 @@ public class main extends javax.swing.JFrame {
     private void btnStop1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop1ActionPerformed
         // TODO add your handling code here:
         Hilo1.stopRunning();
+        ganar();
     }//GEN-LAST:event_btnStop1ActionPerformed
 
     private void btnStop2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop2ActionPerformed
         // TODO add your handling code here:
         Hilo3.stopRunning();
+        ganar();
     }//GEN-LAST:event_btnStop2ActionPerformed
 
     private void btnStop3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop3ActionPerformed
         // TODO add your handling code here:
         Hilo2.stopRunning();
+        ganar();
     }//GEN-LAST:event_btnStop3ActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
@@ -293,8 +305,22 @@ public class main extends javax.swing.JFrame {
         Hilo1.stopRunning();
         Hilo2.stopRunning();
         Hilo3.stopRunning();
+        ganar();
     }//GEN-LAST:event_btnStopAllActionPerformed
 
+    //ver si el jugador gano
+    public void ganar(){
+        // verificar que todas las casillas esten detenidas
+        if ((Hilo1.getRun() == false) && (Hilo2.getRun() == false) && (Hilo3.getRun() == false)) {
+            // si lo estan ver si tiene la misma imagen
+            if ((Hilo1.getFoto() == Hilo2.getFoto()) && (Hilo2.getFoto() == Hilo3.getFoto())    ) {
+                // las tres son iguales 
+                JOptionPane.showMessageDialog( this,"Ganaste Felicidades");
+               
+            }
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
