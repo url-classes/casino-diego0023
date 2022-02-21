@@ -4,6 +4,11 @@
  */
 package main;
 
+import java.awt.Image;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author diego
@@ -13,8 +18,136 @@ public class main extends javax.swing.JFrame {
     /**
      * Creates new form main
      */
+    // creacion de los hilos
+    Hilo Hilo1 = new Hilo();
+    Hilo Hilo2 = new Hilo();
+    Hilo Hilo3 = new Hilo();
+
     public main() {
         initComponents();
+        // apariencia inicial de las ventanas 
+        Image img = new ImageIcon(this.getClass().getResource("/img/estrella.jpg")).getImage();
+        img = img.getScaledInstance(120, 120, java.awt.Image.SCALE_SMOOTH);
+        lbca1.setIcon(new ImageIcon(img));
+        lbca2.setIcon(new ImageIcon(img));
+        lbca3.setIcon(new ImageIcon(img));
+        // iniciar los hilos 
+        Hilo1.celda = 1;
+        Hilo1.start();
+
+        Hilo2.celda = 2;
+        Hilo2.start();
+
+        Hilo3.celda = 3;
+        Hilo3.start();
+
+    }
+
+    // clase del que extiende del hilo para que cada casilla sea un proceso independiente
+    public class Hilo extends Thread {
+
+        public int celda = 0;
+        // todas empiezan detenidas
+        private boolean run = false;
+        private int foto;
+
+        public void startRunning() {
+            run = true;
+           
+        }
+
+        public void stopRunning() {
+            run = false;
+            
+        }
+
+        public int getRandom() {
+            int random = (int) (Math.random() * 3 + 1);
+            return random;
+        }
+
+        @Override
+        public void run() {
+            Image img;
+            // se asigno la primera celda
+            while (celda == 1) {
+                 
+                while (run) {
+                    foto = this.getRandom();
+                    
+                    if (foto == 1) {
+                        img = new ImageIcon(this.getClass().getResource("/img/Flor.jpg")).getImage();
+                    } else if (foto == 2) {
+                        img = new ImageIcon(this.getClass().getResource("/img/hongo.jpg")).getImage();
+                    } else {
+                        img = new ImageIcon(this.getClass().getResource("/img/estrella.jpg")).getImage();
+                    }
+                    img = img.getScaledInstance(120, 120, java.awt.Image.SCALE_SMOOTH);
+                    lbca1.setIcon(new ImageIcon(img));
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            // se asigno la segunda celda
+            while (celda == 2) {
+                while (run) {
+                    foto = this.getRandom();
+                    if (foto == 1) {
+                        img = new ImageIcon(this.getClass().getResource("/img/Flor.jpg")).getImage();
+                    } else if (foto == 2) {
+                        img = new ImageIcon(this.getClass().getResource("/img/hongo.jpg")).getImage();
+                    } else {
+                        img = new ImageIcon(this.getClass().getResource("/img/estrella.jpg")).getImage();
+                    }
+                    img = img.getScaledInstance(120, 120, java.awt.Image.SCALE_SMOOTH);
+                    lbca2.setIcon(new ImageIcon(img));
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                 try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            // se asigno la tercera celda
+            while (celda == 3) {
+                while (run) {
+                    foto = this.getRandom();
+                    if (foto == 1) {
+                        img = new ImageIcon(this.getClass().getResource("/img/Flor.jpg")).getImage();
+                    } else if (foto == 2) {
+                        img = new ImageIcon(this.getClass().getResource("/img/hongo.jpg")).getImage();
+                    } else {
+                        img = new ImageIcon(this.getClass().getResource("/img/estrella.jpg")).getImage();
+                    }
+                    img = img.getScaledInstance(120, 120, java.awt.Image.SCALE_SMOOTH);
+                    lbca3.setIcon(new ImageIcon(img));
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                 try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
     }
 
     /**
@@ -70,8 +203,18 @@ public class main extends javax.swing.JFrame {
         });
 
         btnStopAll.setText("STOP ALL");
+        btnStopAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStopAllActionPerformed(evt);
+            }
+        });
 
         btnIniciar.setText("INICIAR TODOS");
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,15 +268,32 @@ public class main extends javax.swing.JFrame {
 
     private void btnStop1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop1ActionPerformed
         // TODO add your handling code here:
+        Hilo1.stopRunning();
     }//GEN-LAST:event_btnStop1ActionPerformed
 
     private void btnStop2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop2ActionPerformed
         // TODO add your handling code here:
+        Hilo3.stopRunning();
     }//GEN-LAST:event_btnStop2ActionPerformed
 
     private void btnStop3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop3ActionPerformed
         // TODO add your handling code here:
+        Hilo2.stopRunning();
     }//GEN-LAST:event_btnStop3ActionPerformed
+
+    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+        // TODO add your handling code here:
+        Hilo1.startRunning();
+        Hilo2.startRunning();
+        Hilo3.startRunning();
+    }//GEN-LAST:event_btnIniciarActionPerformed
+
+    private void btnStopAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopAllActionPerformed
+        // TODO add your handling code here:
+        Hilo1.stopRunning();
+        Hilo2.stopRunning();
+        Hilo3.stopRunning();
+    }//GEN-LAST:event_btnStopAllActionPerformed
 
     /**
      * @param args the command line arguments
